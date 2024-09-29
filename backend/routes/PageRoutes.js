@@ -1,9 +1,13 @@
 import express from 'express'
-import { authenticate, register, addLink, removeLink } from "../controllers/PageController";
+import { addLink, getLinks, removeLink } from "../controllers/PageController";
 
 const router = express.Router()
 
-//creates a new user (Registering)
-router.post("/register", register)
+//Create Read Delete
+router.post('/links', addLink)
+
+router.get('/links', getLinks)
+
+router.delete('/links/:id', removeLink)
 
 
