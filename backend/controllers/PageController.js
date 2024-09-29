@@ -3,7 +3,16 @@ import Item from '../models/Items';
 
 //Create Read Delete
 const addLink = async (request, response) => {
+    const { title, url, account } = request.body;
 
+    try {
+        const newItem = new Item({ title, url, account });
+        const savedItem = await newItem.save();
+        response.status(201).json(savedItem);
+    } catch (error) {
+        console.error('Error creating portfolio:', error.message);
+        response.status(500).json({ error: 'Internal Server Error' });
+    }
 }
 
 const getLinks = async (request, response) => {
@@ -23,7 +32,17 @@ const getLinks = async (request, response) => {
 }
 
 const removeLink = async (request, response) => {
-
+    const { id } = request.params
+    try {
+        const result = await Item.findOneAndDelete({ _id: id });
+        if (result) {
+            return response.sendStatus(204);  
+        } else {
+            return response.sendStatus(404);  
+        }
+    } catch (error) {
+        return response.sendStatus(400);
+    }
 }
 
 export { addLink, getLinks, removeLink }
