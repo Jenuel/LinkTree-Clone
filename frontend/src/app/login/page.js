@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import RegistrationButton from "./RegistrationButton";
 
 export default async function LoginPage() {
@@ -7,10 +8,32 @@ export default async function LoginPage() {
 
     // const products = await res.json();
 
+    const router = useRouter()
+
+    const handleSubmit = async (event) => {
+      event.preeventDefault();
+      const formData = new FormData(event.target)
+      const username = formData.get('username')
+      const password = formData.get('password')
+
+      try {
+        //API CALL
+
+        const { token } = response.data;
+
+        if (token) {
+          localStorage.setItem('token', token)
+          router.push('/admin')
+        }
+      } catch (error) {
+        //Handle Errors
+      }
+    }
+    
     return (
       <div>
        <h1>Login</h1>
-       <form action="/api/login" method="POST">
+       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username:</label>
           <input type="text" id="username" name="username" required />
