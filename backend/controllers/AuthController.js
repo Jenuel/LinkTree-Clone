@@ -24,8 +24,17 @@ const register = async (request, response) => {
     }
 }
 
-const login = (request, response) => {
-
+const login = async (request, response) => {
+    const  { username, password } = request.body
+    
+    try {
+        const user = await User.login(username, password)
+        const token = createJWT(user._id)
+        response.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000})
+        response.status(200).json({ user: user._id })
+    } catch (error) {
+        response.status(400).json({})
+    }
 }
 
 const refresh = (request, response) => {
