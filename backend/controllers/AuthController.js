@@ -42,7 +42,7 @@ const refresh = (request, response) => {
 }
 
 const logout = (request, response) => {
-
+    response.cookie('jwt', '', { maxAge: 1 })
 } 
 
 export { register, login, refresh, logout }
