@@ -6,8 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export default function RegistrationPage() {
-  const [formData, setFormData] = useState({ 
-    email: "", 
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    username: "", 
     password: "", 
     confirmPassword: ""
   });
@@ -39,8 +41,16 @@ export default function RegistrationPage() {
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-3">
-            <Label htmlFor="email">Email</Label>
-            <Input type="email" id="email" value={formData.email} onChange={handleChange} required />
+            <Label htmlFor="firstName">First Name</Label>
+            <Input type="text" id="firstName" value={formData.firstName} onChange={handleChange} required />
+          </div>
+          <div className="space-y-3">
+            <Label htmlFor="lastName">Last Name</Label>
+            <Input type="text" id="lastName" value={formData.lastName} onChange={handleChange} required />
+          </div>
+          <div className="space-y-3">
+            <Label htmlFor="username">Username</Label>
+            <Input type="username" id="username" value={formData.email} onChange={handleChange} required />
           </div>
           <div className="space-y-3">
             <Label htmlFor="password">Password</Label>

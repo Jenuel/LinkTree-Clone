@@ -38,8 +38,8 @@ export default function LoginPage() {
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-3">
-            <Label htmlFor="email">Email</Label>
-            <Input type="email" id="email" value={formData.email} onChange={handleChange} required />
+            <Label htmlFor="username">Username</Label>
+            <Input type="username" id="username" value={formData.email} onChange={handleChange} required />
           </div>
           <div className="space-y-3">
             <Label htmlFor="password">Password</Label>
