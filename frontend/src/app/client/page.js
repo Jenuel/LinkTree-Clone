@@ -1,37 +1,15 @@
-import { GetServerSideProps } from 'next';
-import { Avatar, AvatarFallback, AvatarImage } from '@components/ui/avatar';
-import { Card } from '@/components/ui/card';
+import ClientDashboard from './ClientDashboard';
 
-export default function Page({data}) {
-  return (
-    <div>
-      <h1>Client</h1>
-      <div className="content">
-        {data.map((link) => (
-          <Card key={link.id}>
-            <CardHeader>
-              <Avatar>
-                <AvatarImage src={link.avatar} fallback={<AvatarFallback>{link.initials}</AvatarFallback>} />
-              </Avatar>
-              <div>
-                <CardTitle>{link.title}</CardTitle>
-              </div>
-            </CardHeader>
-          </Card>
-        ))}
-      </div>
-    </div>
-  );
+async function getData() {
+  const data = [
+    { id: 1, name: "Item 1" },
+    { id: 2, name: "Item 2" },
+    { id: 3, name: "Item 3" }
+  ];
+  return data;
 }
 
-//get links
-// export async function getServerSideProps() {
-//     try {
-//       const res = await fetch('http://localhost:3001/api/data');
-//       const data = await res.json();
-  
-//       return { props: { data } };
-//     } catch (error) {
-//       return { props: { error: "Failed to fetch data" } };
-//     }
-//   }
+export default async function AdminPage() {
+  const data = await getData();
+  return <ClientDashboard initialData={data} />;
+}
