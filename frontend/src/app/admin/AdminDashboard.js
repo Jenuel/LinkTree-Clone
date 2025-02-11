@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export default function AdminDashboard({ links, prof }) {
-    const user = prof;
+    const user = prof[0];
     const [items, setItems] = useState(links);
     const [newTitle, setNewTitle] = useState("");
     const [newUrl, setNewUrl] = useState("");
@@ -55,17 +55,17 @@ export default function AdminDashboard({ links, prof }) {
             <div className="flex justify-between my-4">
                 <div className="flex flex-row items-center">
                     <Avatar>
-                        <AvatarImage src={user.profile.avatar} alt="profile pic" />
-                        <AvatarFallback>{user.profile.display_name[0]}</AvatarFallback>
+                        <AvatarImage src={user.avatar} alt="profile pic" />
+                        <AvatarFallback>{user.display_name[0]}</AvatarFallback>
                     </Avatar>
                     <Dialog>
                         <DialogTrigger asChild>
-                            <Button variant="link">{user.profile.display_name}</Button>
+                            <Button variant="link">{user.display_name}</Button>
                         </DialogTrigger>
                         <DialogContent>
                             <DialogTitle>Profile Information</DialogTitle>
-                            <p>Name: {user.profile.display_name}</p>
-                            <p>Bio: {user.profile.bio}</p>
+                            <p>Name: {user.display_name}</p>
+                            <p>Bio: {user.bio}</p>
                         </DialogContent>
                     </Dialog>
                 </div>
@@ -94,7 +94,7 @@ export default function AdminDashboard({ links, prof }) {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {user.links.map((item) => (
+                    {items.map((item) => (
                         <TableRow key={item.id}>
                             <TableCell>{item.title}</TableCell>
                             <TableCell>{item.url}</TableCell>

@@ -35,6 +35,11 @@ async function getData() {
 }
 
 export default async function AdminPage() {
-  const data = await getData();
+  const {profile, links} = await getData();
+
+  if (!profile || profile.length === 0) {
+    return <div>Error: Profile data is missing</div>;
+  }
+  
   return <AdminDashboard links={links} prof={profile} />;
 }

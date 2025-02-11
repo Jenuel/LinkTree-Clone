@@ -5,7 +5,7 @@ import { Card, CardHeader, CardDescription } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export default function ClientDashboard({ links, prof }) {
-  const user = prof;
+  const user = prof[0];
 
   return (
     <div className="min-h-screen flex items-start justify-center bg-gray-100">
@@ -13,12 +13,12 @@ export default function ClientDashboard({ links, prof }) {
         
         <div className="flex flex-col items-center text-center space-y-2">
           <Avatar>
-            <AvatarImage src={user.profile.avatar} alt="profile pic" />
-            <AvatarFallback>{user.profile.display_name[0]}</AvatarFallback>
+            <AvatarImage src={user.avatar} alt="profile pic" />
+            <AvatarFallback>{user.display_name[0]}</AvatarFallback>
           </Avatar>
           <div>
-            <h2 className="text-xl font-semibold">{user.profile.display_name}</h2>
-            <p className="text-gray-500">{user.profile.bio}</p>
+            <h2 className="text-xl font-semibold">{user.display_name}</h2>
+            <p className="text-gray-500">{user.bio}</p>
           </div>
         </div>
 

@@ -35,6 +35,6 @@ async function getData() {
 }
 
 export default async function ClientPage() {
-  const data = await getData();
+  const { profile, links } = await getData();
   return <ClientDashboard links={links} prof={profile} />;
 }
