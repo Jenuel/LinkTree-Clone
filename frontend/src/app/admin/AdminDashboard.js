@@ -5,12 +5,16 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
+import { Label } from "@/components/ui/label";
+import { DialogTitle } from "@/components/ui/dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 export default function AdminDashboard({ initialData }) {
     const [items, setItems] = useState(initialData);
     const [newItem, setNewItem] = useState("");
     const [editingId, setEditingId] = useState(null);
-    const [editingValue, setEditingValue] = useState("");
+    const [editingTitle, setEditingTitle] = useState("");
+    const [editingUrl, setEditingUrl] = useState("");
 
     const addItem = async () => {
         if (!newItem) return;
@@ -30,16 +34,17 @@ export default function AdminDashboard({ initialData }) {
     };
 
     const updateItem = async () => {
-        if (!editingValue) return; 
+        if (!editingTitle || !editingUrl) return; 
         const res = await fetch(`/api/items/${editingId}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: editingValue }),
+            body: JSON.stringify({ title: editingTitle, url: editingUrl }),
         });
         const updatedItem = await res.json();
         setItems(items.map(item => (item.id === editingId ? updatedItem : item)));
         setEditingId(null);
-        setEditingValue("");
+        setEditingTitle("");
+        setEditingUrl("");
     };
 
     return (
@@ -65,10 +70,23 @@ export default function AdminDashboard({ initialData }) {
                                 <Button className="mr-2" onClick={() => deleteItem(item.id)}>Delete</Button>
                                 <Dialog>
                                     <DialogTrigger asChild>
-                                        <Button onClick={() => { setEditingId(item.id); setEditingValue(item.name); }}>Edit</Button>
+                                        <Button 
+                                            onClick={() => { 
+                                                setEditingId(item.id); 
+                                                setEditingTitle(item.title);
+                                                setEditingUrl(item.url);
+                                            }}>
+                                            Edit
+                                        </Button>
                                     </DialogTrigger>
                                     <DialogContent>
-                                        <Input value={editingValue} onChange={(e) => setEditingValue(e.target.value)} />
+                                        <VisuallyHidden>
+                                            <DialogTitle>Edit Item</DialogTitle>
+                                        </VisuallyHidden>
+                                        <Label>Title of the URL</Label>
+                                        <Input value={editingTitle} onChange={(e) => setEditingTitle(e.target.value)} />
+                                        <Label>Link of the URL</Label>
+                                        <Input value={editingUrl} onChange={(e) => setEditingUrl(e.target.value)} />
                                         <Button onClick={updateItem}>Save</Button>
                                     </DialogContent>
                                 </Dialog>
