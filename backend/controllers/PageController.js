@@ -31,6 +31,27 @@ const getLinks = async (request, response) => {
     }
 }
 
+const updateLink = async (request, response) => {
+    const { id } = request.params
+    const updatedData = request.body
+
+    try {
+        const result = await Item.findOneAndUpdate(
+            { _id: id },
+            { $set: updatedData },
+            { new: true }
+        );
+
+        if (result) {
+            return response.status(200).json(result); 
+        } else {
+            return response.sendStatus(404); 
+        }
+    } catch (error) {
+        return response.status(400).json({ error: error.message });
+    }
+}
+
 const removeLink = async (request, response) => {
     const { id } = request.params
     try {
@@ -45,4 +66,4 @@ const removeLink = async (request, response) => {
     }
 }
 
-export { addLink, getLinks, removeLink }
+export { addLink, getLinks, updateLink, removeLink }

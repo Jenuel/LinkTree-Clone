@@ -1,12 +1,14 @@
 import express from 'express'
-import { addLink, getLinks, removeLink } from "../controllers/PageController";
+import { addLink, getLinks, updateLink, removeLink } from "../controllers/PageController";
 
 const router = express.Router()
 
-//Create Read Delete
+
 router.post('/links', addLink)
 
 router.get('/links', getLinks)
+
+router.get('/links/:id', updateLink)
 
 router.delete('/links/:id', removeLink)
 
