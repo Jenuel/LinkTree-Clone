@@ -13,7 +13,7 @@ const newItem = new Schema({
     },
     account: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Item',
+        ref: 'User',
         required: true
     }
 })
