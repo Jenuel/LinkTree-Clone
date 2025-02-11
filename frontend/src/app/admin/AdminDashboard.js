@@ -59,7 +59,7 @@ export default function AdminDashboard({ initialData }) {
                     {items.map((item) => (
                         <TableRow key={item.id}>
                             <TableCell>{item.id}</TableCell>
-                            <TableCell>{item.name}</TableCell>
+                            <TableCell>{item.title}</TableCell>
                             <TableCell>{item.url}</TableCell>
                             <TableCell>
                                 <Button className="mr-2" onClick={() => deleteItem(item.id)}>Delete</Button>
