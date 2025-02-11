@@ -8,9 +8,9 @@ import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-export default function AdminDashboard({ initialData }) {
-    const user = initialData[0];
-    const [items, setItems] = useState(initialData);
+export default function AdminDashboard({ links, prof }) {
+    const user = prof;
+    const [items, setItems] = useState(links);
     const [newTitle, setNewTitle] = useState("");
     const [newUrl, setNewUrl] = useState("");
     const [editingId, setEditingId] = useState(null);

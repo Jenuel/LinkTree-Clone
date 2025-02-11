@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { Card, CardHeader, CardDescription } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-export default function ClientDashboard({ initialData }) {
-  const user = initialData[0]; // Assuming there's only one user object
+export default function ClientDashboard({ links, prof }) {
+  const user = prof;
 
   return (
     <div className="min-h-screen flex items-start justify-center bg-gray-100">
@@ -22,7 +22,7 @@ export default function ClientDashboard({ initialData }) {
           </div>
         </div>
 
-        {user.links.map((link, index) => (
+        {links.map((link, index) => (
           <Link href={link.url} key={index}>
             <Card className="cursor-pointer hover:bg-gray-100 transition-all">
               <CardHeader>
