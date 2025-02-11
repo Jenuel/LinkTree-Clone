@@ -65,7 +65,7 @@ export default function AdminDashboard({ initialData }) {
                 <DialogContent>
                     <DialogTitle>Profile Information</DialogTitle>
                     <p>Name: {user.profile.display_name}</p>
-                    <p>Email: {user.profile.email}</p>
+                    <p>Bio: {user.profile.bio}</p>
                 </DialogContent>
             </Dialog>
         </div>
@@ -88,7 +88,6 @@ export default function AdminDashboard({ initialData }) {
     <Table>
         <TableHeader>
             <TableRow>
-                <TableHead>ID</TableHead>
                 <TableHead>Title</TableHead>
                 <TableHead>Links</TableHead>
                 <TableHead>Actions</TableHead>
@@ -97,7 +96,6 @@ export default function AdminDashboard({ initialData }) {
         <TableBody>
             {user.links.map((item) => (
                 <TableRow key={item.id}>
-                    <TableCell>{item.id}</TableCell>
                     <TableCell>{item.title}</TableCell>
                     <TableCell>{item.url}</TableCell>
                     <TableCell>
