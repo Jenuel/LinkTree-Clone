@@ -51,90 +51,89 @@ export default function AdminDashboard({ initialData }) {
 
     return (
         <div className="p-6">
-    <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-    <div className="flex justify-between my-4">
-        <div className="flex flex-row items-center">
-            <Avatar>
-                <AvatarImage src={user.profile.avatar} alt="profile pic" />
-                <AvatarFallback>{user.profile.display_name[0]}</AvatarFallback>
-            </Avatar>
-            <Dialog>
-                <DialogTrigger asChild>
-                    <Button variant="link">{user.profile.display_name}</Button>
-                </DialogTrigger>
-                <DialogContent>
-                    <DialogTitle>Profile Information</DialogTitle>
-                    <p>Name: {user.profile.display_name}</p>
-                    <p>Bio: {user.profile.bio}</p>
-                </DialogContent>
-            </Dialog>
-        </div>
+            <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+            <div className="flex justify-between my-4">
+                <div className="flex flex-row items-center">
+                    <Avatar>
+                        <AvatarImage src={user.profile.avatar} alt="profile pic" />
+                        <AvatarFallback>{user.profile.display_name[0]}</AvatarFallback>
+                    </Avatar>
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <Button variant="link">{user.profile.display_name}</Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                            <DialogTitle>Profile Information</DialogTitle>
+                            <p>Name: {user.profile.display_name}</p>
+                            <p>Bio: {user.profile.bio}</p>
+                        </DialogContent>
+                    </Dialog>
+                </div>
 
-        <Dialog>
-            <DialogTrigger asChild>
-                <Button className="w-full max-w-xs">Add Link</Button>
-            </DialogTrigger>
-            <DialogContent>
-                <DialogTitle>Add Link</DialogTitle>
-                <Label>Title of the URL</Label>
-                <Input value={newTitle} onChange={(e) => setNewTitle(e.target.value)} />
-                <Label>Link of the URL</Label>
-                <Input value={newUrl} onChange={(e) => setNewUrl(e.target.value)} />
-                <Button onClick={addItem}>Add Link</Button>
-            </DialogContent>
-        </Dialog>
-    </div>
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <Button className="w-full max-w-xs">Add Link</Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogTitle>Add Link</DialogTitle>
+                        <Label>Title of the URL</Label>
+                        <Input value={newTitle} onChange={(e) => setNewTitle(e.target.value)} />
+                        <Label>Link of the URL</Label>
+                        <Input value={newUrl} onChange={(e) => setNewUrl(e.target.value)} />
+                        <Button onClick={addItem}>Add Link</Button>
+                    </DialogContent>
+                </Dialog>
+            </div>
 
-    <Table>
-        <TableHeader>
-            <TableRow>
-                <TableHead>Title</TableHead>
-                <TableHead>Links</TableHead>
-                <TableHead>Actions</TableHead>
-            </TableRow>
-        </TableHeader>
-        <TableBody>
-            {user.links.map((item) => (
-                <TableRow key={item.id}>
-                    <TableCell>{item.title}</TableCell>
-                    <TableCell>{item.url}</TableCell>
-                    <TableCell>
-                        <Button className="mr-2" onClick={() => deleteItem(item.id)}>
-                            Delete
-                        </Button>
-                        <Dialog>
-                            <DialogTrigger asChild>
-                                <Button
-                                    onClick={() => {
-                                        setEditingId(item.id);
-                                        setEditingTitle(item.title);
-                                        setEditingUrl(item.url);
-                                    }}
-                                >
-                                    Edit
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead>Title</TableHead>
+                        <TableHead>Links</TableHead>
+                        <TableHead>Actions</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {user.links.map((item) => (
+                        <TableRow key={item.id}>
+                            <TableCell>{item.title}</TableCell>
+                            <TableCell>{item.url}</TableCell>
+                            <TableCell>
+                                <Button className="mr-2" onClick={() => deleteItem(item.id)}>
+                                    Delete
                                 </Button>
-                            </DialogTrigger>
-                            <DialogContent>
-                                <DialogTitle>Edit Item</DialogTitle>
-                                <Label>Title of the URL</Label>
-                                <Input
-                                    value={editingTitle}
-                                    onChange={(e) => setEditingTitle(e.target.value)}
-                                />
-                                <Label>Link of the URL</Label>
-                                <Input
-                                    value={editingUrl}
-                                    onChange={(e) => setEditingUrl(e.target.value)}
-                                />
-                                <Button onClick={updateItem}>Save</Button>
-                            </DialogContent>
-                        </Dialog>
-                    </TableCell>
-                </TableRow>
-            ))}
-        </TableBody>
-    </Table>
-</div>
-
+                                <Dialog>
+                                    <DialogTrigger asChild>
+                                        <Button
+                                            onClick={() => {
+                                                setEditingId(item.id);
+                                                setEditingTitle(item.title);
+                                                setEditingUrl(item.url);
+                                            }}
+                                        >
+                                            Edit
+                                        </Button>
+                                    </DialogTrigger>
+                                    <DialogContent>
+                                        <DialogTitle>Edit Item</DialogTitle>
+                                        <Label>Title of the URL</Label>
+                                        <Input
+                                            value={editingTitle}
+                                            onChange={(e) => setEditingTitle(e.target.value)}
+                                        />
+                                        <Label>Link of the URL</Label>
+                                        <Input
+                                            value={editingUrl}
+                                            onChange={(e) => setEditingUrl(e.target.value)}
+                                        />
+                                        <Button onClick={updateItem}>Save</Button>
+                                    </DialogContent>
+                                </Dialog>
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </div>
     );
 }
