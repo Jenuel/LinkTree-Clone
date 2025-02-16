@@ -13,3 +13,4 @@ router.get('/links/:id', updateLink)
 router.delete('/links/:id', removeLink)
 
 
+export default router
