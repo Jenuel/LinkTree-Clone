@@ -1,5 +1,5 @@
 import express from 'express'
-import { addLink, getLinks, updateLink, removeLink } from "../controllers/PageController";
+import { addLink, getLinks, updateLink, removeLink } from "../controllers/PageController.js";
 
 const router = express.Router()
 

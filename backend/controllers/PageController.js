@@ -1,5 +1,5 @@
 import { request } from "express";
-import Item from '../models/Items';
+import Item from '../models/Item.js';
 
 //Create Read Delete
 const addLink = async (request, response) => {
