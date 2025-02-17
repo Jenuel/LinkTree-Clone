@@ -19,7 +19,7 @@ export default function AdminDashboard({ links, prof }) {
 
     const addItem = async () => {
         if (!newTitle || !newUrl) return;
-        const res = await fetch("/api/items", {
+        const res = await fetch("http://localhost:3000/api/links/65fcb8e2a72c3e001b5a1234", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ title: newTitle, url: newUrl }),
@@ -31,19 +31,19 @@ export default function AdminDashboard({ links, prof }) {
     };
 
     const deleteItem = async (id) => {
-        await fetch(`/api/items/${id}`, { method: "DELETE" });
-        setItems(items.filter((item) => item.id !== id));
+        await fetch(`/api/links/${id}`, { method: "DELETE" });
+        setItems(items.filter((item) => item._id !== _id));
     };
 
     const updateItem = async () => {
         if (!editingTitle || !editingUrl) return;
-        const res = await fetch(`/api/items/${editingId}`, {
+        const res = await fetch(`/api/links/${editingId}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ title: editingTitle, url: editingUrl }),
         });
         const updatedItem = await res.json();
-        setItems(items.map((item) => (item.id === editingId ? updatedItem : item)));
+        setItems(items.map((item) => (item._id === editingId ? updatedItem : item)));
         setEditingId(null);
         setEditingTitle("");
         setEditingUrl("");
@@ -95,7 +95,7 @@ export default function AdminDashboard({ links, prof }) {
                 </TableHeader>
                 <TableBody>
                     {items.map((item) => (
-                        <TableRow key={item.id}>
+                        <TableRow key={item._id}>
                             <TableCell>{item.title}</TableCell>
                             <TableCell>{item.url}</TableCell>
                             <TableCell>
@@ -106,7 +106,7 @@ export default function AdminDashboard({ links, prof }) {
                                     <DialogTrigger asChild>
                                         <Button
                                             onClick={() => {
-                                                setEditingId(item.id);
+                                                setEditingId(item._id);
                                                 setEditingTitle(item.title);
                                                 setEditingUrl(item.url);
                                             }}
