@@ -6,7 +6,8 @@ const app = express()
 
 app.use(express.json());
 app.use(cookieParser());
-app.use("/api",  )
+app.use("/api", PageRoutes)
+
 mongoose.connect(process.env.DB_URI)
  .then(() => {
     app.listen(process.env.PORT, () => {
