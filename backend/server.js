@@ -1,9 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
 import cookieParser from 'cookie-parser'
-import PageRoutes from "./routes/PageRoutes";
-const app = express()
+import PageRoutes from "./routes/PageRoutes.js";
+import dotenv from 'dotenv';
 
+const app = express()
+dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api", PageRoutes)
