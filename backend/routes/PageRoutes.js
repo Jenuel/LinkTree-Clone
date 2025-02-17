@@ -6,9 +6,9 @@ const router = express.Router()
 
 router.post('/links', addLink)
 
-router.get('/links', getLinks)
+router.get('/links/:id', getLinks)
 
-router.get('/links/:id', updateLink)
+router.put('/links/:id', updateLink)
 
 router.delete('/links/:id', removeLink)
 
