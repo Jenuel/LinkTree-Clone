@@ -19,34 +19,50 @@ export default function AdminDashboard({ links, prof }) {
 
     const addItem = async () => {
         if (!newTitle || !newUrl) return;
-        const res = await fetch("http://localhost:3000/api/links/65fcb8e2a72c3e001b5a1234", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ title: newTitle, url: newUrl }),
-        });
-        const newData = await res.json();
-        setItems([...items, newData]);
-        setNewTitle("");
-        setNewUrl("");
+    
+        try {
+            const response = await axios.post('https://example.com/api/data', {
+                key1: newTitle,
+                key2: newUrl
+            });
+    
+            const newData = response.data;
+            setItems([...items, newData]);
+    
+            setNewTitle("");
+            setNewUrl("");
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     const deleteItem = async (id) => {
-        await fetch(`/api/links/${id}`, { method: "DELETE" });
-        setItems(items.filter((item) => item._id !== _id));
+        try {
+            await axios.delete(`https://localhost:3000/api/links/${id}`);
+            setItems(items.filter((item) => item._id !== id));
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     const updateItem = async () => {
         if (!editingTitle || !editingUrl) return;
-        const res = await fetch(`/api/links/${editingId}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ title: editingTitle, url: editingUrl }),
-        });
-        const updatedItem = await res.json();
-        setItems(items.map((item) => (item._id === editingId ? updatedItem : item)));
-        setEditingId(null);
-        setEditingTitle("");
-        setEditingUrl("");
+
+        try {
+            const response = await axios.put(`http://localhost:3000/api/links/${editingId}`, {
+                key1: editingTitle,
+                key2: editingUrl
+            });
+
+            const updatedItem = response.data;
+            setItems(items.map((item) => (item._id === editingId ? updatedItem : item)));
+
+            setEditingId(null);
+            setEditingTitle("");
+            setEditingUrl("");
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     return (
