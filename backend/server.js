@@ -3,11 +3,15 @@ import mongoose from "mongoose";
 import cookieParser from 'cookie-parser'
 import PageRoutes from "./routes/PageRoutes.js";
 import dotenv from 'dotenv';
+import cors from 'cors';
 
-const app = express()
+const app = express();
+
 dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
+
 app.use("/api", PageRoutes)
 
 mongoose.connect(process.env.DB_URI)
