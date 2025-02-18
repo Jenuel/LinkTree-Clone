@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import axios from "axios";
 
 export default function AdminDashboard({ links, prof }) {
     const user = prof[0];
@@ -38,7 +39,8 @@ export default function AdminDashboard({ links, prof }) {
 
     const deleteItem = async (id) => {
         try {
-            await axios.delete(`https://localhost:3000/api/links/${id}`);
+            console.log('Deleting item with id:', id);
+            await axios.delete(`http://localhost:3000/api/links/${id}`);
             setItems(items.filter((item) => item._id !== id));
         } catch (error) {
             console.error('Error:', error);
@@ -115,7 +117,7 @@ export default function AdminDashboard({ links, prof }) {
                             <TableCell>{item.title}</TableCell>
                             <TableCell>{item.url}</TableCell>
                             <TableCell>
-                                <Button className="mr-2" onClick={() => deleteItem(item.id)}>
+                                <Button className="mr-2" onClick={() => deleteItem(item._id)}>
                                     Delete
                                 </Button>
                                 <Dialog>
