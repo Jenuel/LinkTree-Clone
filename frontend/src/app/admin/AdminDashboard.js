@@ -49,16 +49,16 @@ export default function AdminDashboard({ links, prof }) {
 
     const updateItem = async () => {
         if (!editingTitle || !editingUrl) return;
-
+    
         try {
             const response = await axios.put(`http://localhost:3000/api/links/${editingId}`, {
-                key1: editingTitle,
-                key2: editingUrl
+                title: editingTitle,
+                url: editingUrl
             });
-
+    
             const updatedItem = response.data;
             setItems(items.map((item) => (item._id === editingId ? updatedItem : item)));
-
+    
             setEditingId(null);
             setEditingTitle("");
             setEditingUrl("");
