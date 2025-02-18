@@ -1,4 +1,5 @@
 import ClientDashboard from './ClientDashboard';
+import axios from 'axios';
 
 async function getData() {
   const profile = [
@@ -9,28 +10,13 @@ async function getData() {
       "avatar": "https://example.com/avatar.jpg"
     }
   ]
-  const links = [
-    {
-      "title": "My Portfolio",
-      "url": "https://johndoe.dev"
-    },
-    {
-      "title": "GitHub",
-      "url": "https://github.com/johndoe"
-    },
-    {
-      "title": "LinkedIn",
-      "url": "https://linkedin.com/in/johndoe"
-    },
-    {
-      "title": "Twitter",
-      "url": "https://twitter.com/johndoe"
-    },
-    {
-      "title": "YouTube Channel",
-      "url": "https://youtube.com/@johndoe"
-    }
-  ]
+  try {
+    const response = await axios.get('http://localhost:3000/api/links/65fcb8e2a72c3e001b5a1234');
+    const links = response.data;  
+    return { profile, links };
+  } catch (error) {
+    console.error("Error fetching links:", error);
+  }
   return { profile, links };
 }
 
